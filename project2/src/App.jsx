@@ -2,6 +2,8 @@ import React from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import SectionOne from './components/SectionOne'
+import Features from './components/Features'
+import Services from './components/Service'
 
 const App = () => {
   return (
@@ -11,6 +13,8 @@ const App = () => {
         <Hero/>
       <SectionOne/>
       </div>
+        <Features/>
+        <Services/>
     </>
   )
 }
