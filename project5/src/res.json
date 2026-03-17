@@ -1,0 +1,44 @@
+{
+  "coord": {
+    "lon": 77.33,
+    "lat": 28.58
+  },
+  "weather": [
+    {
+      "id": 804,
+      "main": "Clouds",
+      "description": "overcast clouds",
+      "icon": "04d"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 26.93,
+    "feels_like": 26.07,
+    "temp_min": 26.93,
+    "temp_max": 26.93,
+    "pressure": 1010,
+    "humidity": 21,
+    "sea_level": 1010,
+    "grnd_level": 985
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 0.8,
+    "deg": 123,
+    "gust": 1.11
+  },
+  "clouds": {
+    "all": 89
+  },
+  "dt": 1773724577,
+  "sys": {
+    "country": "IN",
+    "sunrise": 1773709115,
+    "sunset": 1773752387
+  },
+  "timezone": 19800,
+  "id": 7279746,
+  "name": "Noida",
+  "cod": 200
+}

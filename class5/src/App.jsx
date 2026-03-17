@@ -55,7 +55,7 @@ const App = () => {
     <div>
      
       <Window Children={"hello"}>
-     <Button/>
+      <Button/>
       </Window>
 
     </div>
