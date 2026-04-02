@@ -1,0 +1,16 @@
+routing 
+login  redirect to homepage
+signup redirect to login page
+
+if not login then not open private routes
+private routes 
+profile, writeblog, 
+
+
+public routes
+homepage, login page, signup page, articles read, 
+
+functionlty 
+login ek token ko save localstorage , cookies
+
+
