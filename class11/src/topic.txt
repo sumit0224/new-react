@@ -1,0 +1,9 @@
+image optimised 
+component optimised
+lazy loading
+activity
+suspense
+useReducer
+useMemo,
+react memo
+skelteon loading
