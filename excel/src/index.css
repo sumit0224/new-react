@@ -1,3 +1,116 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* Button style */
+.tool-btn {
+  @apply flex items-center justify-center w-8 h-6 rounded cursor-pointer hover:bg-gray-200 text-gray-700 transition;
+}
+
+/* Dropdown box like Excel */
+.dropdown-box {
+  @apply flex items-center justify-between px-2 h-6 border rounded bg-white cursor-pointer text-sm hover:bg-gray-100;
+}
+
+/* Divider line */
+.divider {
+  @apply w-px h-6 bg-gray-300 mx-1;
+}
+
+/* Color indicator */
+.color-box {
+  @apply w-3 h-3 border rounded-sm;
+}
+
+/* Name box (D1) */
+.name-box {
+  @apply flex items-center justify-between gap-1 px-2 h-5 w-[70px] border rounded bg-white text-sm cursor-pointer hover:bg-gray-100;
+}
+
+/* fx box */
+.fx-box {
+  @apply px-2 h-5 flex items-center border rounded bg-white text-sm font-medium text-gray-600;
+}
+
+/* input */
+.formula-input {
+  @apply flex-1 h-5 px-3 border rounded bg-white text-sm outline-none focus:ring-1 focus:ring-blue-400;
+}
+
+/* small buttons */
+.icon-btn {
+  @apply w-8 h-5 flex items-center justify-center rounded hover:bg-gray-200 cursor-pointer text-gray-700;
+}
+
+/* Insert item */
+.insert-item {
+  @apply flex items-center gap-1 px-2 py-1 rounded cursor-pointer text-sm text-gray-700 hover:bg-gray-200 whitespace-nowrap;
+}
+
+/* Disabled */
+.insert-item.disabled {
+  @apply text-gray-400 cursor-not-allowed hover:bg-transparent;
+}
+
+/* Divider */
+.divider {
+  @apply w-px h-6 bg-gray-300;
+}
+
+/* Chart buttons */
+.chart-btn {
+  @apply w-8 h-8 flex items-center justify-center rounded cursor-pointer hover:bg-gray-200;
+}
+
+.icon-sm {
+  @apply w-4 h-4 text-gray-700;
+}
+
+.insert-item {
+  @apply flex items-center gap-1 px-2 py-1 rounded cursor-pointer text-sm text-gray-700 hover:bg-gray-200 whitespace-nowrap;
+}
+
+.insert-item.disabled {
+  @apply text-gray-400 cursor-not-allowed hover:bg-transparent;
+}
+
+.divider {
+  @apply w-px h-6 bg-gray-300;
+}
+
+.chart-btn {
+  @apply w-8 h-8 flex items-center justify-center rounded cursor-pointer hover:bg-gray-200 text-gray-700;
+}
+
+.share-item {
+  @apply flex items-center gap-1 px-2 py-1 rounded cursor-pointer text-sm text-gray-700 hover:bg-gray-200;
+}
+
+.dropdown-btn {
+  @apply w-8 h-8 flex items-center justify-center rounded cursor-pointer hover:bg-gray-200 text-gray-700;
+}
+.layout-item {
+  @apply flex items-center gap-1 px-2 py-1 rounded cursor-pointer text-sm text-gray-700 hover:bg-gray-200 whitespace-nowrap;
+}
+/* Tab */
+.tab-item {
+  @apply px-3 py-2 cursor-pointer relative text-[#605e5c] hover:text-black transition;
+}
+
+.tab-active {
+  @apply text-black font-medium;
+}
+
+.tab-underline {
+  @apply absolute left-0 bottom-0 w-full h-[2px] bg-[#217346];
+}
+
+/* Right toolbar buttons */
+.toolbar-btn {
+  @apply flex items-center gap-1 cursor-pointer bg-white hover:bg-[#edebe9] px-2 py-[2px] rounded;
+}
+
+.toolbar-btn-green {
+  @apply flex items-center gap-1 cursor-pointer bg-green-700 text-white px-2 py-[2px] rounded hover:bg-green-800;
+}
