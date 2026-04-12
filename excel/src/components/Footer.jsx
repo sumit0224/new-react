@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext} from 'react'
 import { TbMathGreater } from "react-icons/tb";
 import { FaLessThan, FaPlus } from "react-icons/fa6";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -16,14 +16,14 @@ const Footer = () => {
         dropUp,
         setDropUp
     } = useContext(globalContext)
-    // ✅ Add new sheet
+
     const addSheet = () => {
-        const newSheet = `sheet${sheets.length + 1}`
+        const newSheet = `Sheet${sheets.length + 1}`
         setSheets([...sheets, newSheet])
         setActive(newSheet)
     }
 
-    // ✅ Handle rename
+
     const handleChange = (e, index) => {
         const updated = [...sheets]
         updated[index] = e.target.value
@@ -31,7 +31,7 @@ const Footer = () => {
     }
 
     return (
-        <div className='absolute bottom-0 left-0 w-full h-[36px] bg-[#f3f2f1] border-t border-[#e1dfdd] flex items-center px-2 text-[13px]'>
+        <div className='fixed bottom-0 left-0 w-full h-[36px] bg-[#f3f2f1] border-t border-[#e1dfdd] flex items-center px-2 text-[13px]'>
 
             {/* LEFT CONTROLS */}
             <div className='flex items-center gap-2 text-[#605e5c] text-lg'>

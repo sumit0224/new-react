@@ -7,37 +7,39 @@ import FunctionBar from './components/FunctionBar'
 import InsertBar from './components/toolbar/InsertBar'
 import ShareBar from './components/toolbar/ShareBar'
 import PageLayoutBar from './components/toolbar/PagelayoutBar'
-import Page from './components/Page'
+
 import { globalContext } from './context/GlobalContext'
 
+import Grid from './components/Grid'
+
 const App = () => {
-  const {activeTab } = useContext(globalContext)
+  const { activeTab } = useContext(globalContext)
 
   const obj = {
-    Home : <Home/>,
-    Insert: <InsertBar/>,
-    Share: <ShareBar/>,
-    Page_Layout: <PageLayoutBar/>
+    Home: <Home />,
+    Insert: <InsertBar />,
+    Share: <ShareBar />,
+    Page_Layout: <PageLayoutBar />
 
   }
   return (
     <>
 
-  
+
       <Navbar >
-     <Navbar2 />
-     <div className='py-2 '>
-      {
-        obj[activeTab]
-      }
-      <FunctionBar/>
-     </div>
-    </Navbar>
-    <Page>
-      <h1>hello</h1>
-    </Page>
-      <Footer/>
-  
+        <Navbar2 />
+        <div className='py-2 '>
+          {
+            obj[activeTab]
+          }
+          <FunctionBar />
+        </div>
+      </Navbar>
+
+      <Grid />
+
+      <Footer />
+
     </>
   )
 }

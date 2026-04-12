@@ -1,13 +1,17 @@
+import { useContext } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { TbMathFunction } from "react-icons/tb";
+import { gridContext } from "../context/GridContext";
 
 const FunctionBar = () => {
+  const {selectedCell} = useContext(gridContext)
+  const cell =  selectedCell.row +1
   return (
-    <div className="w-full bg-white rounded-lg border-b px-3 py-1 mt-1 flex items-center gap-2 ">
+    <div className="function-bar">
 
       {/* Cell Name (D1) */}
       <div className="name-box ">
-        <span>D1</span>
+        <span>{selectedCell.col+ cell}</span>
         <RiArrowDropDownLine />
       </div>
 

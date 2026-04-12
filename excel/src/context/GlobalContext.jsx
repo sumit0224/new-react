@@ -6,8 +6,8 @@ const GlobalContext = ({ children }) => {
     const [activeTab, setActiveTab] = useState("Home")
     const [dropDown, setDropDown] = useState(false)
 
-    const [sheets, setSheets] = useState(["sheet1"])
-    const [active, setActive] = useState("sheet1")
+    const [sheets, setSheets] = useState(["Sheet1"])
+    const [active, setActive] = useState("Sheet1")
     const [editing, setEditing] = useState(null)
     const [dropUp, setDropUp] = useState(false)
 
