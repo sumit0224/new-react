@@ -1,4 +1,3 @@
-import React from 'react'
 import { PiDotsNineBold } from "react-icons/pi";
 import { TiHome } from "react-icons/ti";
 import { WiCloudDown } from "react-icons/wi";
@@ -6,7 +5,7 @@ import { IoIosSearch } from "react-icons/io";
 import { IoDiamondOutline } from "react-icons/io5";
 import { CiSettings } from "react-icons/ci";
 
-const Navbar = ({children}) => {
+const TopNavbar = ({ children }) => {
     return (
         <div className=' sticky top-0 left-0 z-30 px-3 bg-[#f3f2f1] '>
 
@@ -52,6 +51,6 @@ const Navbar = ({children}) => {
             </div>
         </div>
     )
-}
+};
 
-export default Navbar
+export default TopNavbar;

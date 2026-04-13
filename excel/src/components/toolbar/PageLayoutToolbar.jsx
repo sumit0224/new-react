@@ -4,7 +4,7 @@ import { LuSplit } from "react-icons/lu";
 import { RiArrowDropDownLine } from "react-icons/ri";
 // import { BiRightToLeft } from "react-icons/bi";
 
-const PageLayoutBar = () => {
+const PageLayoutToolbar = () => {
   return (
     <div className="w-[98vw] bg-white rounded-lg border-b px-3 py-1 flex items-center justify-between">
 
@@ -51,4 +51,4 @@ const PageLayoutBar = () => {
   );
 };
 
-export default PageLayoutBar;
+export default PageLayoutToolbar;

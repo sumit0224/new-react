@@ -2,7 +2,7 @@ import { IoShareSocialOutline, IoLinkOutline } from "react-icons/io5";
 import { TbTableShare } from "react-icons/tb";
 import { RiArrowDropDownLine } from "react-icons/ri";
 
-const ShareBar = () => {
+const ShareToolbar = () => {
   return (
     <div className="w-[98vw] bg-white rounded-lg border-b px-3 py-1 flex items-center justify-between">
 
@@ -38,4 +38,4 @@ const ShareBar = () => {
   );
 };
 
-export default ShareBar;
+export default ShareToolbar;
