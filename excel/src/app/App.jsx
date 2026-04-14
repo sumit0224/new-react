@@ -25,8 +25,9 @@ const App = () => {
       <TopNavbar>
         <RibbonTabs />
         <div className="py-2">{toolbarByTab[activeTab] ?? <HomeToolbar />}</div>
-        <FormulaBar />
+        
       </TopNavbar>
+      <FormulaBar />
       <Grid />
       <WorkbookFooter />
     </>

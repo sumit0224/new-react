@@ -31,7 +31,7 @@ const FormulaBar = () => {
 
       <input
         type="text"
-        value={cellValue}
+        value={cellValue.text}
         onChange={(event) =>
           updateCellValue(selectedCell.rowIndex, selectedCell.colIndex, event.target.value)
         }

@@ -13,14 +13,36 @@ const GridProvider = ({ children }) => {
   });
 
   const [data, setData] = useState(() =>
-    Array.from({ length: ROW_COUNT }, () => Array.from({ length: COL_COUNT }, () => '')),
+    Array.from({ length: ROW_COUNT }, () =>
+      Array.from({ length: COL_COUNT }, () => ({
+        text: "",
+        textColor: "text-black",
+        bg: "bg-white",
+        size: "11px",
+      }))
+    )
   );
 
   const updateCellValue = useCallback((rowIndex, colIndex, value) => {
     setData((prevData) => {
       const nextData = [...prevData];
       nextData[rowIndex] = [...nextData[rowIndex]];
-      nextData[rowIndex][colIndex] = value;
+      nextData[rowIndex][colIndex] = {
+        ...nextData[rowIndex][colIndex],
+        text: value,
+      };
+      return nextData;
+    });
+  }, []);
+
+  const updateCellStyle = useCallback((rowIndex, colIndex, styles) => {
+    setData((prevData) => {
+      const nextData = [...prevData];
+      nextData[rowIndex] = [...nextData[rowIndex]];
+      nextData[rowIndex][colIndex] = {
+        ...nextData[rowIndex][colIndex],
+        ...styles,
+      };
       return nextData;
     });
   }, []);
@@ -30,12 +52,13 @@ const GridProvider = ({ children }) => {
       data,
       setData,
       updateCellValue,
+      updateCellStyle,
       rowCount: ROW_COUNT,
       colCount: COL_COUNT,
       selectedCell,
       setSelectedCell,
     }),
-    [data, selectedCell, updateCellValue],
+    [data, selectedCell, updateCellValue, updateCellStyle],
   );
 
   return <GridContext.Provider value={value}>{children}</GridContext.Provider>;

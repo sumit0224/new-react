@@ -5,16 +5,16 @@ import { IoIosSearch } from "react-icons/io";
 import { IoDiamondOutline } from "react-icons/io5";
 import { CiSettings } from "react-icons/ci";
 
-const TopNavbar = ({ children }) => {
+const TopNavbar = ({ children, userInitials = "SG" }) => {
     return (
-        <div className=' sticky top-0 left-0 z-30 px-3 bg-[#f3f2f1] '>
+        <div className='sticky top-0 left-0 z-30 px-3 bg-[#f3f2f1]'>
 
-           <div className=' flex justify-between items-center text-[13px] w-full h-[45px]  bg-[#f3f2f1] border-b border-[#e1dfdd]'>
+           <div className='flex justify-between items-center text-[13px] w-full h-[45px] bg-[#f3f2f1] border-b border-[#e1dfdd]'>
              {/* LEFT */}
             <div className="flex items-center gap-2 text-[#605e5c]">
-                <PiDotsNineBold className='text-[24px] cursor-pointer hover:bg-[#edebe9] p-1 rounded' />
+                <PiDotsNineBold className='text-[24px] cursor-pointer hover:bg-[#edebe9] p-1 rounded box-content' />
 
-                <TiHome className='text-[#217346] text-[20px]' />
+                <TiHome className='text-[#217346] text-[20px] cursor-pointer' />
 
                 <span className='font-normal text-[#323130]'>File1</span>
 
@@ -22,7 +22,7 @@ const TopNavbar = ({ children }) => {
             </div>
 
             {/* CENTER (Search like Excel) */}
-            <div className="flex items-center w-[320px] bg-white border border-[#e1dfdd] rounded px-2 py-[2px]">
+            <div className="flex items-center w-[320px] bg-white border border-[#e1dfdd] focus-within:border-[#217346] rounded px-2 py-[2px]">
                 <IoIosSearch className='text-[#605e5c]' />
                 <input
                     type="text"
@@ -42,11 +42,12 @@ const TopNavbar = ({ children }) => {
                 <CiSettings className='text-[24px] cursor-pointer hover:bg-[#edebe9] p-1 rounded' />
 
                 <div className='w-7 h-7 flex items-center justify-center rounded-full bg-[#217346] text-white text-[12px] font-medium'>
-                    SG
+                    {userInitials}
                 </div>
             </div>
            </div>
-            <div>
+
+            <div className="relative z-50">
                 {children}
             </div>
         </div>

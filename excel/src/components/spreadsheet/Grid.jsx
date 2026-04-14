@@ -1,9 +1,12 @@
 import { useContext } from 'react';
 import Cell from './Cell';
 import { GridContext } from '../../contexts/GridContext';
+import { ToolbarContext } from '../../contexts/ToolbarContext';
 
 const Grid = () => {
   const { data, updateCellValue, colCount } = useContext(GridContext);
+  
+
 
   return (
     <div className="overflow-auto h-screen w-screen">
@@ -31,7 +34,10 @@ const Grid = () => {
                 key={colIndex}
                 rowIndex={rowIndex}
                 colIndex={colIndex}
-                value={cellValue}
+                bgColor={cellValue.bg}
+                color={cellValue.textColor}
+                value={cellValue.text}
+                cellStyle={cellValue}
                 onChange={(newValue) => updateCellValue(rowIndex, colIndex, newValue)}
               />
             ))}
