@@ -1,41 +1,35 @@
-import { createContext, useMemo, useState } from 'react';
+import { createContext, useContext, useMemo } from 'react';
+import { UIProvider, UIContext } from './UIContext';
+import { SheetProvider, SheetContext } from './SheetContext';
+import { SheetUIProvider, SheetUIContext } from './SheetUiContext';
 
 export const GlobalContext = createContext(null);
 
-const GlobalProvider = ({ children }) => {
-  const [activeTab, setActiveTab] = useState('Home');
-  const [isFileDropdownOpen, setIsFileDropdownOpen] = useState(false);
-  const [sheets, setSheets] = useState(['Sheet1']);
-  const [activeSheet, setActiveSheet] = useState('Sheet1');
-  const [editingSheetIndex, setEditingSheetIndex] = useState(null);
-  const [isSheetMenuOpen, setIsSheetMenuOpen] = useState(false);
+const GlobalContextComposer = ({ children }) => {
+  const ui = useContext(UIContext);
+  const sheet = useContext(SheetContext);
+  const sheetUI = useContext(SheetUIContext);
 
   const value = useMemo(
     () => ({
-      activeTab,
-      setActiveTab,
-      isFileDropdownOpen,
-      setIsFileDropdownOpen,
-      sheets,
-      setSheets,
-      activeSheet,
-      setActiveSheet,
-      editingSheetIndex,
-      setEditingSheetIndex,
-      isSheetMenuOpen,
-      setIsSheetMenuOpen,
+      ...ui,
+      ...sheet,
+      ...sheetUI,
     }),
-    [
-      activeTab,
-      isFileDropdownOpen,
-      sheets,
-      activeSheet,
-      editingSheetIndex,
-      isSheetMenuOpen,
-    ],
+    [ui, sheet, sheetUI],
   );
 
   return <GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>;
 };
+
+const GlobalProvider = ({ children }) => (
+  <UIProvider>
+    <SheetProvider>
+      <SheetUIProvider>
+        <GlobalContextComposer>{children}</GlobalContextComposer>
+      </SheetUIProvider>
+    </SheetProvider>
+  </UIProvider>
+);
 
 export default GlobalProvider;

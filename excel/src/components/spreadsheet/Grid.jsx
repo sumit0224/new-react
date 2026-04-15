@@ -31,13 +31,17 @@ const Grid = () => {
 
             {rowData.map((cellValue, colIndex) => (
               <Cell
+            
                 key={colIndex}
+                bold={cellValue.isBold}
+                fontSize={cellValue.size}
                 rowIndex={rowIndex}
                 colIndex={colIndex}
                 bgColor={cellValue.bg}
                 color={cellValue.textColor}
                 value={cellValue.text}
                 cellStyle={cellValue}
+                align={cellValue.align}
                 onChange={(newValue) => updateCellValue(rowIndex, colIndex, newValue)}
               />
             ))}

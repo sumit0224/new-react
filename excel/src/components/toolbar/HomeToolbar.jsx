@@ -16,16 +16,29 @@ const HomeToolbar = () => {
     isBgColorDropDown,
     toggleBgColor,
     bgColorValue,
-    setBgColorValue
+    setBgColorValue, 
+    isBold,
+    setIsBold
   } = useContext(ToolbarContext);
 
-  const { selectedCell, updateCellStyle,data} = useContext(GridContext);
+  const { selectedCell, updateCellStyle} = useContext(GridContext);
 
-  const value = data[selectedCell.rowIndex][selectedCell.colIndex]
-  useEffect(()=>{
-    setColorValue({...colorValue, ["textColor"]: value.textColor})
-  }, [value])
- 
+  const applyCellStyle = (styles) => {
+    if (!selectedCell || typeof selectedCell.rowIndex !== 'number' || typeof selectedCell.colIndex !== 'number') {
+      return;
+    }
+
+    updateCellStyle(selectedCell.rowIndex, selectedCell.colIndex, styles);
+  };
+
+  const handleBoldClick = () => {
+    setIsBold((prev) => {
+      const nextBold = !prev;
+      applyCellStyle({ isBold: nextBold });
+      return nextBold;
+    });
+  };
+
   const closeTimerRef = useRef(null);
 
   const fontSizes = [11, 13, 14, 16, 18];
@@ -60,6 +73,7 @@ const HomeToolbar = () => {
     if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
   };
 
+
   return (
     <div className="w-full bg-white rounded-lg shadow-sm py-1 border-b px-3 flex items-center gap-2 overflow-x-auto">
       <div className="tool-btn"><Icons.undo /></div>
@@ -76,7 +90,12 @@ const HomeToolbar = () => {
 
       <div className="dropdown-box w-[70px] ">
         <div
-          onClick={toggleFontSizeDropdown}
+          onClick={()=>{
+            toggleFontSizeDropdown()
+            
+            
+          }}
+          
           className="flex justify-between items-center cursor-pointer"
         >
           <span>{fontSizeValue}</span>
@@ -86,19 +105,16 @@ const HomeToolbar = () => {
 
       </div>
 
-      <div className="tool-btn font-bold">B</div>
+      <div className={`tool-btn font-bold ${isBold && "bg-zinc-300 "}`} onClick={handleBoldClick}>B</div>
       <div className="tool-btn"><Icons.borderAll /></div>
 
-      <div className="tool-btn flex items-center gap-1" onClick={()=> toggleBgColor()}>
+      <div className="tool-btn flex items-center gap-1" onClick={() => toggleBgColor()}>
         <Icons.fillColor />
         <span className={`color-box ${bgColorValue.bg}`} />
       </div>
 
 
-      <div className="tool-btn flex items-center gap-1" onClick={() => {
-        toggleColor()
-
-      }}>
+      <div className="tool-btn flex items-center gap-1" onClick={() => toggleColor()}>
         <span className={`font-bold ${colorValue.text}`}>A</span>
 
         <span className={`color-box ${colorValue.bg}`} />
@@ -108,9 +124,9 @@ const HomeToolbar = () => {
 
       <div className="divider" />
 
-      <div className="tool-btn"><Icons.alignLeft /></div>
-      <div className="tool-btn"><Icons.alignCenter /></div>
-      <div className="tool-btn"><Icons.alignRight /></div>
+      <div className="tool-btn" onClick={() => applyCellStyle({ align: "left" })}><Icons.alignLeft /></div>
+      <div className="tool-btn" onClick={() => applyCellStyle({ align: "center" })}><Icons.alignCenter /></div>
+      <div className="tool-btn" onClick={() => applyCellStyle({ align: "right" })}><Icons.alignRight /></div>
 
       <div className="divider" />
 
@@ -135,6 +151,7 @@ const HomeToolbar = () => {
               key={fontSize}
               onClick={() => {
                 setFontSizeValue(fontSize);
+                applyCellStyle({ size: fontSize });
                 toggleFontSizeDropdown();
               }}
               className="px-2 py-1 hover:bg-gray-200 cursor-pointer"
@@ -153,9 +170,9 @@ const HomeToolbar = () => {
               return <div
                 key={color.name}
                 onClick={() => {
-                  setColorValue(color)
-                  updateCellStyle(selectedCell.rowIndex, selectedCell.colIndex, { textColor: color.text });
-                  toggleColor()
+                  setColorValue(color);
+                  applyCellStyle({ textColor: color.text });
+                  toggleColor();
                 }}
                 className={`p-1 w-5 h-5 ${color.bg} hover:border hover:border-gray-400 border`}
               >
@@ -175,9 +192,9 @@ const HomeToolbar = () => {
               return <div
                 key={color.name}
                 onClick={() => {
-                  setBgColorValue(color)
-                  updateCellStyle(selectedCell.rowIndex, selectedCell.colIndex, { bg: color.bg });
-                  toggleBgColor()
+                  setBgColorValue(color);
+                  applyCellStyle({ bg: color.bg });
+                  toggleBgColor();
                 }}
                 className={`p-1 w-5 h-5 ${color.bg} hover:border hover:border-gray-400 border`}
               >
