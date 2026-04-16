@@ -1,6 +1,6 @@
-import { createContext, useMemo, useState } from 'react';
+import { createContext, useState, useMemo } from 'react';
 
-export const SelectionContext = createContext(null);
+export const SelectionContext = createContext();
 
 export const SelectionProvider = ({ children }) => {
   const [selectedCell, setSelectedCell] = useState({
@@ -9,10 +9,13 @@ export const SelectionProvider = ({ children }) => {
     colLabel: 'A',
   });
 
-  const value = useMemo(() => ({
-    selectedCell,
-    setSelectedCell,
-  }), [selectedCell]);
+  const value = useMemo(
+    () => ({
+      selectedCell,
+      setSelectedCell,
+    }),
+    [selectedCell]
+  );
 
   return (
     <SelectionContext.Provider value={value}>

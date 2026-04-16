@@ -2,31 +2,28 @@ import { useContext } from 'react';
 import { TbMathGreater } from 'react-icons/tb';
 import { FaLessThan, FaPlus } from 'react-icons/fa6';
 import { RxHamburgerMenu } from 'react-icons/rx';
+import { SheetContext } from '../../contexts/SheetContext';
 import { GlobalContext } from '../../contexts/GlobalContext';
 
 const WorkbookFooter = () => {
   const {
     sheets,
-    setSheets,
-    activeSheet,
-    setActiveSheet,
+    activeSheetId,
+    setActiveSheetId,
+    addSheet,
+    renameSheet,
+    deleteSheet,
+  } = useContext(SheetContext);
+
+  const {
     editingSheetIndex,
     setEditingSheetIndex,
     isSheetMenuOpen,
     setIsSheetMenuOpen,
   } = useContext(GlobalContext);
 
-  const addSheet = () => {
-    const nextSheetName = `Sheet${sheets.length + 1}`;
-    setSheets((prevSheets) => [...prevSheets, nextSheetName]);
-    setActiveSheet(nextSheetName);
-  };
-
-  const handleSheetRename = (event, index) => {
-    const nextValue = event.target.value;
-    setSheets((prevSheets) =>
-      prevSheets.map((sheet, sheetIndex) => (sheetIndex === index ? nextValue : sheet)),
-    );
+  const handleSheetRename = (event, sheetId) => {
+    renameSheet(sheetId, event.target.value);
   };
 
   return (
@@ -42,35 +39,35 @@ const WorkbookFooter = () => {
 
       {isSheetMenuOpen && (
         <div className="w-[160px] absolute left-8 bottom-10 bg-[#f3f2f1] rounded-lg shadow-lg max-h-[150px] overflow-y-auto px-2 py-2">
-          {sheets.map((sheetName, index) => (
+          {sheets.map((sheet) => (
             <div
-              key={index}
+              key={sheet.id}
               onClick={() => {
-                setActiveSheet(sheetName);
+                setActiveSheetId(sheet.id);
                 setIsSheetMenuOpen(false);
               }}
               className={`px-3 py-1 rounded cursor-pointer text-sm ${
-                activeSheet === sheetName ? 'bg-[#217346] text-white' : 'hover:bg-[#edebe9]'
+                activeSheetId === sheet.id ? 'bg-[#217346] text-white' : 'hover:bg-[#edebe9]'
               }`}
             >
-              {sheetName}
+              {sheet.title}
             </div>
           ))}
         </div>
       )}
 
       <div className="flex items-center gap-1 ml-3">
-        {sheets.map((sheetName, index) => (
+        {sheets.map((sheet, index) => (
           <input
-            key={index}
-            value={sheetName}
+            key={sheet.id}
+            value={sheet.title}
             readOnly={editingSheetIndex !== index}
-            onClick={() => setActiveSheet(sheetName)}
+            onClick={() => setActiveSheetId(sheet.id)}
             onDoubleClick={() => setEditingSheetIndex(index)}
             onBlur={() => setEditingSheetIndex(null)}
-            onChange={(event) => handleSheetRename(event, index)}
+            onChange={(event) => handleSheetRename(event, sheet.id)}
             className={`px-4 w-[100px] py-1 border rounded-t outline-none ${
-              activeSheet === sheetName
+              activeSheetId === sheet.id
                 ? 'bg-white text-black border-[#e1dfdd]'
                 : 'bg-[#f3f2f1] text-[#605e5c] border-transparent'
             }`}
