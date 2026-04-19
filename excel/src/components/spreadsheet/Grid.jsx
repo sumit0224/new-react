@@ -2,8 +2,13 @@ import { useContext } from 'react';
 import Cell from './Cell';
 import { GridContext } from '../../contexts/GridContext';
 
+
 const Grid = () => {
   const { data, updateCellValue, colCount } = useContext(GridContext);
+
+
+
+
 
   return (
     <div className="overflow-auto h-screen w-screen">

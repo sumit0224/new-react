@@ -4,48 +4,82 @@ import { WiCloudDown } from "react-icons/wi";
 import { IoIosSearch } from "react-icons/io";
 import { IoDiamondOutline } from "react-icons/io5";
 import { CiSettings } from "react-icons/ci";
+import { useContext, useState } from "react";
+import { GridContext } from "../../contexts/GridContext";
+import exportToExcel from "../../contexts/Download";
 
 const TopNavbar = ({ children, userInitials = "SG" }) => {
+    const [fileName, setFileName] = useState("File1")
+    const [isEditing, setIsEditing] = useState(false)
+    const { data } = useContext(GridContext)
+
+    let res = data.map((row, index) => {
+        let l = row.length
+        return row.map((obj, index) => {
+
+            return index === l - 1 ? obj.text + "\n" : obj.text
+        })
+
+    })
+
+
+
     return (
         <div className='sticky top-0 left-0 z-30 px-3 bg-[#f3f2f1]'>
 
-           <div className='flex justify-between items-center text-[13px] w-full h-[45px] bg-[#f3f2f1] border-b border-[#e1dfdd]'>
-             {/* LEFT */}
-            <div className="flex items-center gap-2 text-[#605e5c]">
-                <PiDotsNineBold className='text-[24px] cursor-pointer hover:bg-[#edebe9] p-1 rounded box-content' />
+            <div className='flex justify-between items-center text-[13px] w-full h-[45px] bg-[#f3f2f1] border-b border-[#e1dfdd]'>
+                {/* LEFT */}
+                <div className="flex items-center gap-2 text-[#605e5c]">
+                    <PiDotsNineBold className='text-[24px] cursor-pointer hover:bg-[#edebe9] p-1 rounded box-content' />
 
-                <TiHome className='text-[#217346] text-[20px] cursor-pointer' />
+                    <TiHome className='text-[#217346] text-[20px] cursor-pointer' />
 
-                <span className='font-normal text-[#323130]'>File1</span>
+                    <span
+                        className="font-normal text-[#323130] overflow-hidden"
+                        onDoubleClick={() => setIsEditing(true)}
+                    >
+                        {isEditing ? (
+                            <input
+                                type="text"
+                                value={fileName}
+                                onChange={(e) => setFileName(e.target.value)}
+                                autoFocus
+                                className="bg-transparent border-none outline-none p-0 m-0 text-inherit font-inherit w-auto"
+                                style={{ width: `${fileName.length + 1}ch` }}
+                            />
+                        ) : (
+                            <span onClick={() => setIsEditing(true)}>{fileName}</span>
+                        )}
+                    </span>
 
-                <WiCloudDown className='text-[18px] text-[#605e5c]' />
-            </div>
-
-            {/* CENTER (Search like Excel) */}
-            <div className="flex items-center w-[320px] bg-white border border-[#e1dfdd] focus-within:border-[#217346] rounded px-2 py-[2px]">
-                <IoIosSearch className='text-[#605e5c]' />
-                <input
-                    type="text"
-                    className='w-full bg-transparent outline-none text-[13px] px-2 placeholder:text-[#a19f9d]'
-                    placeholder='Search'
-                />
-            </div>
-
-            {/* RIGHT */}
-            <div className="flex items-center gap-4 text-[#605e5c]">
-
-                <div className='flex items-center gap-1 cursor-pointer hover:text-black'>
-                    <IoDiamondOutline className='text-[16px]' />
-                    <span className='text-[13px]'>Buy Microsoft 365</span>
+                    <WiCloudDown onClick={() => exportToExcel(res, fileName)} className='text-[18px] text-[#605e5c]' />
                 </div>
 
-                <CiSettings className='text-[24px] cursor-pointer hover:bg-[#edebe9] p-1 rounded' />
+                {/* CENTER (Search like Excel) */}
+                <div className="flex items-center w-[320px] bg-white border border-[#e1dfdd] focus-within:border-[#217346] rounded px-2 py-[2px]">
+                    <IoIosSearch className='text-[#605e5c]' />
+                    <input
+                        type="text"
+                        className='w-full bg-transparent outline-none text-[13px] px-2 placeholder:text-[#a19f9d]'
+                        placeholder='Search'
+                    />
+                </div>
 
-                <div className='w-7 h-7 flex items-center justify-center rounded-full bg-[#217346] text-white text-[12px] font-medium'>
-                    {userInitials}
+                {/* RIGHT */}
+                <div className="flex items-center gap-4 text-[#605e5c]">
+
+                    <div className='flex items-center gap-1 cursor-pointer hover:text-black'>
+                        <IoDiamondOutline className='text-[16px]' />
+                        <span className='text-[13px]'>Buy Microsoft 365</span>
+                    </div>
+
+                    <CiSettings className='text-[24px] cursor-pointer hover:bg-[#edebe9] p-1 rounded' />
+
+                    <div className='w-7 h-7 flex items-center justify-center rounded-full bg-[#217346] text-white text-[12px] font-medium'>
+                        {userInitials}
+                    </div>
                 </div>
             </div>
-           </div>
 
             <div className="relative z-50">
                 {children}
